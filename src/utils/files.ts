@@ -4,7 +4,7 @@ import { v4 as getUUID } from 'uuid';
 const uploadFile = async (resume: File) => {
     try {
         const name = getUUID();
-        const { data: uploadData, error } = await db.storage.from("files").upload(`${name}.pdf`, resume);
+        const { data: uploadData, error } = await db.storage.from("files").upload(`${name}`, resume);
         if (error) {
             console.error(error);
             return { success: false, error: error?.message };
@@ -37,15 +37,12 @@ export const getFiles = async (course: string, semester: string, subject: string
     return { success: true, data };
 }
 
-export const getFile = async (id: string) => {
-    const { data, error } = await db.from('files').select().eq('id', id);
+export const getFile = async (course: string, semester: string, subject: string) => {
+    const { data, error } = await db.from('files').select().eq('course', course).eq('semester', semester).eq('subject', subject);
     if (error) {
         return { success: false, error: error.message };
     }
     return {
-        success: true, data: {
-            subject: data[0]?.subject,
-            url: data[0]?.url
-        }
+        success: true, data
     };
 }

@@ -46,7 +46,7 @@ export const verifyUser = async ({ email, password }: { email: string, password:
     if (!isPasswordCorrect) {
         return { success: false, error: "Invalid password..." };
     }
-    return { success: true, data: {id: data.id, username: data.name, useremail: data.email} };
+    return { success: true, data: {id: data.id, username: data.name, useremail: data.email, setup: data.course != "N/A"} };
 }
 
 export const getUser = async (id: string) => {

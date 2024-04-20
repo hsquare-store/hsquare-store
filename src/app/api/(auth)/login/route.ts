@@ -10,5 +10,8 @@ export async function POST(request: NextRequest) {
     }
     const res = NextResponse.json(data, { status: 201 });
     res.cookies.set("user", data?.id, { httpOnly: true });
+    if (data?.setup) {
+        res.cookies.set("setup", data?.id, { httpOnly: true });
+    }
     return res
 }

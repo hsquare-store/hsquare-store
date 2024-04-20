@@ -1,5 +1,7 @@
 
 import { useEffect, useState } from "react";
+import Image from 'next/image'
+import Logo from "../../public/icon.png"
 
 export default function NetworkSecure({ element }: { element: React.ReactNode }) {
     const [status, setStatus] = useState(true)
@@ -30,9 +32,17 @@ export default function NetworkSecure({ element }: { element: React.ReactNode })
     return (
         <>
             {status ? element : <>
-                <div className="fixed top-0 left-0 w-full h-full bg-gray-200 flex items-center justify-center">
-                    <h1 className="text-2xl text-red-600">You are offline</h1>
-                </div>
+                <section className="h-[100vh] flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                        <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                            <Image className="w-8 h-8 mr-2" src={Logo} alt="logo" />
+                            Hsquare
+                        </a>
+                        <h1 className="leading-tight tracking-tight text-gray-500 md:text-xl dark:text-white">
+                            Please connect to internet to continue.
+                        </h1>
+                    </div>
+                </section >
             </>}
         </>
     )
